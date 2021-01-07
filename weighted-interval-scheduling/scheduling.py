@@ -1,11 +1,12 @@
 def get_schedule(intervals):
+    def binary_search_for_p(i):
+        f, n = intervals[i][1], len(intervals) - 1
+        while n - i > 1:
+            m = (i + n) // 2
+            i, n = (i, m) if intervals[m][0] >= f else (m, n)
+        return i if intervals[i][0] >= f else n
     intervals = list(sorted(intervals, key=lambda i: i[0])) + [[float('inf')]]
-    p = [len(intervals) - 1 for i in intervals]
-    for i in range(len(intervals) - 2, -1, -1):
-        for j in range(i + 1, len(intervals)):
-            if intervals[j][0] >= intervals[i][1]:
-                p[i] = j
-                break
+    p = [binary_search_for_p(i) for i in range(len(intervals) - 1)]
     optR = [0 for i in range(len(intervals))]
     take = [None for i in range(len(intervals))]
     for i in range(len(intervals) - 2, -1, -1):
