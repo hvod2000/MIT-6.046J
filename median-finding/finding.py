@@ -9,10 +9,10 @@ def get_median_of_columns(elements):
 
 def get_by_index(elements, i):
     x = get_median_of_columns(elements)
-    elements_before = {e for e in elements if e < x}
-    elements_after = {e for e in elements if e > x}
-    rank_of_x = len({e for e in elements if e <= x})
-    if rank_of_x == i + 1:
+    elements_before = [e for e in elements if e < x]
+    elements_after = [e for e in elements if e > x]
+    rank_of_x = len([e for e in elements if e <= x])
+    if len(elements_before) <= i < rank_of_x:
         return x
     elif rank_of_x > i:
         return get_by_index(elements_before, i)
