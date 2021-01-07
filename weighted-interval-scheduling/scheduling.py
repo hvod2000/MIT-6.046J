@@ -14,9 +14,9 @@ def get_schedule(intervals):
         take[i] = v_if_take > v_if_leave
         optR[i] = v_if_take if take[i] else v_if_leave
     def get_result():
-        tail = 0
-        while tail < len(intervals) - 1:
-            if take[tail]:
-                yield intervals[tail]
-            tail = p[tail] if take[tail] else tail + 1
+        i = 0
+        while i < len(intervals) - 1:
+            if take[i]:
+                yield intervals[i]
+            i = p[i] if take[i] else i + 1
     return list(get_result())
